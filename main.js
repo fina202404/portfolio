@@ -1,20 +1,47 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const sections = document.querySelectorAll("section");
-  const options = {
-    threshold: 0.1
-  };
 
+function switchLanguage(lang) {
+  document.querySelectorAll('.lang-en').forEach(el => {
+    el.classList.toggle('d-none', lang !== 'en');
+  });
+  document.querySelectorAll('.lang-jp').forEach(el => {
+    el.classList.toggle('d-none', lang !== 'jp');
+  });
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const sections = document.querySelectorAll("section");
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
+      if (entry.isIntersecting) {
         entry.target.classList.add("visible");
         observer.unobserve(entry.target);
       }
     });
-  }, options);
+  }, { threshold: 0.1 });
 
   sections.forEach(section => {
     section.classList.add("hidden");
     observer.observe(section);
   });
+
+
+  const goTopBtn = document.getElementById("goTopBtn");
+  goTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+
+  switchLanguage('en');
 });
+
+
+window.onscroll = function () {
+  const goTopBtn = document.getElementById("goTopBtn");
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    goTopBtn.style.display = "block";
+  } else {
+    goTopBtn.style.display = "none";
+  }
+};
