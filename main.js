@@ -45,3 +45,19 @@ window.onscroll = function () {
     goTopBtn.style.display = "none";
   }
 };
+
+(function() {
+  emailjs.init("EOqYdUBaWi18paufj");
+})();
+
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  emailjs.sendForm('service_nuqla3u', 'template_9fkd4lo', this)
+    .then(function(response) {
+       alert('Message sent successfully!');
+       document.getElementById('contact-form').reset();
+    }, function(error) {
+       alert('Failed to send message. Please try again.');
+    });
+});
