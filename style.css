@@ -91,4 +91,16 @@ header a:hover {
   color: gray; 
 }
 
+.form-wrapper {
+  margin: 10px auto;
+  max-width: 300px;
+}
 
+@media (min-width: 992px) {
+  .form-wrapper {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+  }
+}
